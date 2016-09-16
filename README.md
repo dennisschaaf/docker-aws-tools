@@ -4,6 +4,7 @@ AWS Tools
 Just a simple Docker image that includes:
 - AWS CLI
 - JQ
+- build-essential
 - colordiff
 - curl
 - python

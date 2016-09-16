@@ -9,8 +9,10 @@ RUN apt-get update && apt-get upgrade -y
 
 # Install APT deps
 RUN apt-get update && apt-get install -y \
+  build-essential \
   colordiff \
   curl \
+  git \
   python \
   python-demjson \
   realpath \
@@ -19,6 +21,10 @@ RUN apt-get update && apt-get install -y \
   zip
 
 WORKDIR /tmp
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+  apt-get install -y nodejs
 
 # Install jq
 RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O /usr/local/bin/jq && \
