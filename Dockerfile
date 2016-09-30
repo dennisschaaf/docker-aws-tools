@@ -23,16 +23,24 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /tmp
 
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+RUN curl --silent --location https://deb.nodesource.com/setup_6.x | bash - && \
   apt-get install -y nodejs
 
 # Install jq
-RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O /usr/local/bin/jq && \
+RUN curl --silent --location --output /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
   chmod ug+x /usr/local/bin/jq
 
 # Install AWS CLI Client
-RUN wget "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -O awscli-bundle.zip && \
+RUN curl --silent --output awscli-bundle.zip "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" && \
   unzip awscli-bundle.zip && \
   ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+# Install Terraform
+RUN curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/0.7.4/terraform_0.7.4_linux_amd64.zip" && \
+  unzip -d /usr/local/bin/ terraform.zip
+
+# Install Packer
+RUN curl --silent --output packer.zip "https://releases.hashicorp.com/packer/0.10.2/packer_0.10.2_linux_amd64.zip" && \
+  unzip -d /usr/local/bin/ packer.zip
 
 CMD [ "bash" ]
