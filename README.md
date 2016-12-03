@@ -3,16 +3,21 @@ AWS Tools
 
 Just a simple Docker image that includes:
 - AWS CLI
-- JQ
 - build-essential
 - colordiff
 - curl
+- JQ
+- Packer
 - python
 - python-demjson
 - realpath
+- shellcheck
+- Terraform
 - unzip
 - wget
 - zip
+
+
 
 Usage
 -----
