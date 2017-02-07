@@ -1,5 +1,7 @@
+all: rmi build push
 
-all: build push
+rmi:
+	docker rmi bugcrowd/aws-tools || true
 
 build:
 	docker build -t bugcrowd/aws-tools .
