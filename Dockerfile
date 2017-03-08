@@ -43,11 +43,13 @@ RUN curl --silent --output awscli-bundle.zip "https://s3.amazonaws.com/aws-cli/a
   ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 # Install Terraform
-RUN curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/0.8.5/terraform_0.8.5_linux_amd64.zip" && \
+ENV TERRAFORM_VERSION=0.8.8
+RUN curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" && \
   unzip -d /usr/local/bin/ terraform.zip
 
 # Install Packer
-RUN curl --silent --output packer.zip "https://releases.hashicorp.com/packer/0.11.0/packer_0.11.0_linux_amd64.zip" && \
+ENV PACKER_VERSION=0.12.3
+RUN curl --silent --output packer.zip "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip" && \
   unzip -d /usr/local/bin/ packer.zip
 
 CMD [ "bash" ]
