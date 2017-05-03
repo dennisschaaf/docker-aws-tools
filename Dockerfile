@@ -43,7 +43,7 @@ RUN curl --silent --output awscli-bundle.zip "https://s3.amazonaws.com/aws-cli/a
   ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 # Install Terraform
-ENV TERRAFORM_VERSION=0.8.8
+ENV TERRAFORM_VERSION=0.9.4
 RUN curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" && \
   unzip -d /usr/local/bin/ terraform.zip
 
