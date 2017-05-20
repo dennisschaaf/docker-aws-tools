@@ -24,8 +24,9 @@ RUN curl --silent --location --output jsonlint.tar.gz https://github.com/dmerand
   python setup.py install
 
 # Install colordiff
-RUN curl --silent --output colordiff.tar.gz "http://www.colordiff.org/colordiff-1.0.16.tar.gz" && \
-  curl --silent --output colordiff.tar.gz.sig "http://www.colordiff.org/colordiff-1.0.16.tar.gz.sig" && \
+ENV COLORDIFF_VERSION=1.0.16
+RUN curl --silent --output colordiff.tar.gz "https://www.colordiff.org/colordiff-${COLORDIFF_VERSION}.tar.gz" && \
+  curl --silent --output colordiff.tar.gz.sig "https://www.colordiff.org/colordiff-${COLORDIFF_VERSION}.tar.gz.sig" && \
   curl --silent --output colordiff-author-public-key https://www.sungate.co.uk/gpgkey_2013.txt && \
   gpg --import colordiff-author-public-key && \
   gpg --verify colordiff.tar.gz.sig colordiff.tar.gz && \
