@@ -31,7 +31,7 @@ RUN curl --silent --output colordiff.tar.gz "https://www.colordiff.org/colordiff
   gpg --import colordiff-author-public-key && \
   gpg --verify colordiff.tar.gz.sig colordiff.tar.gz && \
   tar -xvf colordiff.tar.gz && \
-  cd colordiff-1.0.16 && \
+  cd colordiff-${COLORDIFF_VERSION} && \
   make install
 
 # Install jq
@@ -44,7 +44,7 @@ RUN curl --silent --output awscli-bundle.zip "https://s3.amazonaws.com/aws-cli/a
   ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 # Install Terraform
-ENV TERRAFORM_VERSION=0.9.4
+ENV TERRAFORM_VERSION=0.9.5
 RUN curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" && \
   unzip -d /usr/local/bin/ terraform.zip
 
