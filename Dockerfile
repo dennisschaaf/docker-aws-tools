@@ -24,7 +24,7 @@ RUN curl --silent --location --output jsonlint.tar.gz https://github.com/dmerand
   python setup.py install
 
 # Install colordiff
-ENV COLORDIFF_VERSION=1.0.16
+ENV COLORDIFF_VERSION=1.0.18
 RUN curl --silent --output colordiff.tar.gz "https://www.colordiff.org/colordiff-${COLORDIFF_VERSION}.tar.gz" && \
   curl --silent --output colordiff.tar.gz.sig "https://www.colordiff.org/colordiff-${COLORDIFF_VERSION}.tar.gz.sig" && \
   curl --silent --output colordiff-author-public-key https://www.sungate.co.uk/gpgkey_2013.txt && \
@@ -44,7 +44,7 @@ RUN curl --silent --output awscli-bundle.zip "https://s3.amazonaws.com/aws-cli/a
   ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 # Install Terraform
-ENV TERRAFORM_VERSION=0.9.5
+ENV TERRAFORM_VERSION=0.9.11
 RUN curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" && \
   unzip -d /usr/local/bin/ terraform.zip
 
