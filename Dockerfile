@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM golang:1.9-alpine3.6
 
 RUN apk add --no-cache \
   bash \
@@ -44,9 +44,18 @@ RUN curl --silent --output awscli-bundle.zip "https://s3.amazonaws.com/aws-cli/a
   ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 # Install Terraform
-ENV TERRAFORM_VERSION=0.10.2
-RUN curl --silent --output terraform.zip "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" && \
-  unzip -d /usr/local/bin/ terraform.zip
+# Use Terraform Bundle to create a bundle with commonly used provider plugins
+# This is so we do not have to download provider plugins on every Terraform run
+ENV TERRAFORM_HOME=$GOPATH/src/github.com/hashicorp/terraform
+ADD terraform-bundle.hcl /tmp/terraform-bundle.hcl
+RUN git clone https://github.com/hashicorp/terraform.git ${TERRAFORM_HOME} && \
+  cd ${TERRAFORM_HOME} && \
+  go install ./tools/terraform-bundle && \
+  terraform-bundle package /tmp/terraform-bundle.hcl && \
+  mkdir distribution && \
+  cd distribution && \
+  unzip $(find ../ -name terraform_*.zip) -d /usr/local/bin && \
+  rm -rf ${TERRAFORM_HOME}
 
 # Install Packer
 ENV PACKER_VERSION=0.12.3
