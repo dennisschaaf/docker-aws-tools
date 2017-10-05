@@ -9,6 +9,7 @@ RUN apk add --no-cache \
   make \
   ncurses \
   nodejs \
+  nodejs-npm \
   perl \
   python \
   unzip \
